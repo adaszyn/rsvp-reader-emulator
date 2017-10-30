@@ -48,7 +48,7 @@ export default class Screen extends Component {
     const { width, height } = this.props;
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
     return (
-      <div style={{ height, width }} className="screen">
+      <div style={{ height, width, lineHeight: `${height}px` }} className="screen">
         <span className={textClassName}>
           {this.state.words[this.state.currentWordIndex]}
         </span>

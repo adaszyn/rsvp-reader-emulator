@@ -1,8 +1,6 @@
 .screen {
     border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
 .screen > .text.sans-serif {
     font-family: ComputerModernSansSerif, sans-serif;
