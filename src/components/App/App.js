@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Screen from "../Screen/Screen";
+import Statistics from "../Statistics/Statistics";
 import "./App.css";
 
 const SAMPLE_TEXT = `Lorem ipsum dolor sit amet, consectetur 
@@ -29,6 +30,7 @@ class App extends Component {
           onStop={onStopCallback}
           serif={true}
         />
+        <Statistics />      
       </div>
     );
   }
