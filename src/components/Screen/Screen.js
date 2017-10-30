@@ -39,7 +39,6 @@ export default class Screen extends Component {
     if (running) {
       this.setupInterval();
     } else {
-      console.log("clearing interval")
       this.clearInterval();
     }
   }
