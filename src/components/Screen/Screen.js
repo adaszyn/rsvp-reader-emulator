@@ -5,31 +5,55 @@ import "./Screen.css";
 
 export default class Screen extends Component {
   constructor(props) {
-    const { text, wordsPerScreen } = props;
+    const { text, wordsPerScreen, running } = props;
     super(props);
     this.state = {
       words: splitTextByWordCount(text, wordsPerScreen),
-      currentWordIndex: 0
+      currentWordIndex: 0,
+      running
     };
-    this.setupInterval();
+    if (running) {
+      this.setupInterval();
+    }
   }
-  setupInterval () {
+
+  setupInterval() {
     this.intervalId = setInterval(() => {
       if (this.state.currentWordIndex === this.state.words.length) {
         clearInterval(this.intervalId);
       }
       this.setState({
         currentWordIndex: this.state.currentWordIndex + 1
-      })
-    }, this.props.speed)
+      });
+    }, this.props.speed);
   }
+
+  clearInterval() {
+    clearInterval(this.intervalId);
+  }
+
+  componentWillReceiveProps({ running }) {
+    this.setState({
+      running
+    });
+    if (running) {
+      this.setupInterval();
+    } else {
+      console.log("clearing interval")
+      this.clearInterval();
+    }
+  }
+
   render() {
     const { width, height } = this.props;
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
-    return <div style={{ height, width }} className="screen">
-      
-      <span className={textClassName}>{this.state.words[this.state.currentWordIndex]}</span>
-    </div>;
+    return (
+      <div style={{ height, width }} className="screen">
+        <span className={textClassName}>
+          {this.state.words[this.state.currentWordIndex]}
+        </span>
+      </div>
+    );
   }
 }
 
@@ -41,5 +65,6 @@ Screen.propTypes = {
   speed: PropTypes.number,
   onStart: PropTypes.func,
   onEnd: PropTypes.func,
-  serif: PropTypes.bool
+  serif: PropTypes.bool,
+  running: PropTypes.bool
 };
