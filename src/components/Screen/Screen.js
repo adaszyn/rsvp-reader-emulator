@@ -17,9 +17,9 @@ export default class Screen extends Component {
 Screen.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  text: PropTypes.string.required,
-  wordsPerScreen: PropTypes.number.required,
-  speed: PropTypes.number.required,
+  text: PropTypes.string,
+  wordsPerScreen: PropTypes.number,
+  speed: PropTypes.number,
   onStart: PropTypes.func,
   onEnd: PropTypes.func
 };
