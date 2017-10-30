@@ -1,3 +1,13 @@
 .screen {
     border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.screen > .text.sans-serif {
+    font-family: ComputerModernSansSerif, sans-serif;
+}
+
+.screen > .text.serif {
+    font-family: ComputerModernSerif, serif;
 }

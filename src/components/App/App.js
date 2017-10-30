@@ -27,6 +27,7 @@ class App extends Component {
           text={SAMPLE_TEXT}
           onStart={onStartCallback}
           onStop={onStopCallback}
+          serif={true}
         />
       </div>
     );

@@ -25,8 +25,10 @@ export default class Screen extends Component {
   }
   render() {
     const { width, height } = this.props;
+    const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
     return <div style={{ height, width }} className="screen">
-      <span>{this.state.words[this.state.currentWordIndex]}</span>
+      
+      <span className={textClassName}>{this.state.words[this.state.currentWordIndex]}</span>
     </div>;
   }
 }
@@ -38,5 +40,6 @@ Screen.propTypes = {
   wordsPerScreen: PropTypes.number,
   speed: PropTypes.number,
   onStart: PropTypes.func,
-  onEnd: PropTypes.func
+  onEnd: PropTypes.func,
+  serif: PropTypes.bool
 };
