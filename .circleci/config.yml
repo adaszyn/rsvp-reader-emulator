@@ -21,6 +21,8 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run:  git config --global user.email "wojciech.adaszynski@gmail.com"
+      - run:  git config --global user.name "Wojciech Adaszyński"
       - run: npm test
       - run: npm run build
       - run: npm run deploy
