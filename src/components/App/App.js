@@ -40,6 +40,7 @@ class App extends Component {
     return (
       <div className="App">
         <ControlPanel
+          running={this.state.running}
           onStart={this.onControlPanelStart.bind(this)}
           onReset={this.onControlPanelReset.bind(this)}
         />
