@@ -13,8 +13,6 @@ export default class Statistics extends Component {
   }
 
   setupInterval () {
-      const { startTime, stopTime } = this.props;
-
       this.intervalId = setInterval(() => {
         this.setState({
           time: formatMilisecondsToText(new Date().getTime() - this.props.startTime)

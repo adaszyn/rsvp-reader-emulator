@@ -9,9 +9,6 @@ adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. 
 Ut enim ad minim veniam, quis`;
 
-function onStartCallback(startTime) {}
-function onStopCallback(stopTime) {}
-
 class App extends Component {
   constructor(props) {
     super(props);
