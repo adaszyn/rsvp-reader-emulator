@@ -1,4 +1,51 @@
+@media screen and (orientation: portrait) {
+  .ControlPanel {
+    flex-direction: row;
+  }
+  .speed-select-container {
+    margin-left: 20px;
+  }
+}
+@media screen and (orientation: landscape) {
+    .ControlPanel {
+      flex-direction: column;
+    }
+    .speed-select-container {
+      margin-top: 20px;
+    }
+}
+
+.ControlPanel {
+  display: flex;
+  align-items: center;
+}
 .control-icon {
     width: 80px;
     height: 80px;
+}
+.speed-select-container {
+  border: 1px solid #ccc;
+  width: 80px;
+  height: 40px;
+  border-radius: 3px;
+  overflow: hidden;
+  /* background: #fafafa url("img/icon-select.png") no-repeat 90% 50%; */
+}
+
+.speed-select {
+  padding: 5px 8px;
+  color: white;
+  font-size: 16px;
+  text-align-last: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  box-shadow: none;
+  background: black;
+  background-image: none;
+  -webkit-appearance: none;
+}
+
+.speed-select:focus {
+  outline: none;
 }

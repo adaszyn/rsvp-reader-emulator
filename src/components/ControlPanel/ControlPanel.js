@@ -4,23 +4,32 @@ import playIcon from "./play.svg";
 import resetIcon from "./reset.svg";
 import "./ControlPanel.css";
 
+const PlayIcon = ({ onStart }) => (
+  <img className="control-icon" onClick={onStart} src={playIcon} />
+);
+
+const ResetIcon = ({ onReset }) => (
+  <img className="control-icon" onClick={onReset} src={resetIcon} />
+);
+
 export default class ControlPanel extends Component {
   render() {
-    if (this.props.running) {
-      return (
-        <img
-          className="control-icon"
-          onClick={this.props.onReset}
-          src={resetIcon}
-        />
-      );
-    }
+    const { onReset, onStart, onSpeedChange, running } = this.props;
     return (
-      <img
-        className="control-icon"
-        onClick={this.props.onStart}
-        src={playIcon}
-      />
+      <div className="ControlPanel">
+        {this.props.running ? (
+          <ResetIcon onReset={onReset} />
+        ) : (
+          <PlayIcon onStart={onStart} />
+        )}
+        <div className="speed-select-container">
+          <select disabled={running} className="speed-select" onChange={({target: {value}}) => onSpeedChange(value)}>
+            <option>400</option>
+            <option>800</option>
+            <option>1200</option>
+          </select>
+        </div>
+      </div>
     );
   }
 }
@@ -28,5 +37,6 @@ export default class ControlPanel extends Component {
 ControlPanel.propTypes = {
   onStart: PropTypes.func,
   onReset: PropTypes.func,
+  onSpeedChange: PropTypes.func,
   running: PropTypes.bool
 };

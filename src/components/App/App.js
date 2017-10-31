@@ -15,7 +15,8 @@ class App extends Component {
     this.state = {
       running: false,
       startTime: 0,
-      stopTime: 0
+      stopTime: 0,
+      speed: 400
     };
   }
   onControlPanelStart() {
@@ -30,6 +31,11 @@ class App extends Component {
       running: false
     });
   }
+  onControlPanelSpeedChange (value) {
+    this.setState({
+      speed: Number(value)
+    })
+  }
   onScreenReaderFinished (time) {
     this.setState({
       running: false,
@@ -43,13 +49,14 @@ class App extends Component {
           running={this.state.running}
           onStart={this.onControlPanelStart.bind(this)}
           onReset={this.onControlPanelReset.bind(this)}
+          onSpeedChange={this.onControlPanelSpeedChange.bind(this)}
         />
         <Screen
           running={this.state.running}
           width={300}
           height={300}
           wordsPerScreen={2}
-          speed={800}
+          speed={this.state.speed}
           text={SAMPLE_TEXT}
           serif={true}
           onFinish={this.onScreenReaderFinished.bind(this)}
