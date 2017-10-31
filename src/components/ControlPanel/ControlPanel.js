@@ -5,11 +5,11 @@ import resetIcon from "./reset.svg";
 import "./ControlPanel.css";
 
 const PlayIcon = ({ onStart }) => (
-  <img className="control-icon" onClick={onStart} src={playIcon} />
+  <img alt="play-icon" className="control-icon" onClick={onStart} src={playIcon} />
 );
 
 const ResetIcon = ({ onReset }) => (
-  <img className="control-icon" onClick={onReset} src={resetIcon} />
+  <img alt="reset-icon" className="control-icon" onClick={onReset} src={resetIcon} />
 );
 
 export default class ControlPanel extends Component {
