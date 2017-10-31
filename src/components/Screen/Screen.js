@@ -21,10 +21,12 @@ export default class Screen extends Component {
     this.intervalId = setInterval(() => {
       if (this.state.currentWordIndex === this.state.words.length) {
         clearInterval(this.intervalId);
+        this.props.onFinish()
+      } else {
+        this.setState({
+          currentWordIndex: this.state.currentWordIndex + 1
+        });
       }
-      this.setState({
-        currentWordIndex: this.state.currentWordIndex + 1
-      });
     }, this.props.speed);
   }
 
@@ -33,12 +35,16 @@ export default class Screen extends Component {
   }
 
   componentWillReceiveProps({ running }) {
-    this.setState({
-      running
-    });
     if (running) {
+      this.setState({
+        running
+      });
       this.setupInterval();
     } else {
+      this.setState({
+        running,
+        currentWordIndex: 0 // we reset index counter when timer stops running
+      });
       this.clearInterval();
     }
   }
@@ -47,7 +53,10 @@ export default class Screen extends Component {
     const { width, height } = this.props;
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
     return (
-      <div style={{ height, width, lineHeight: `${height}px` }} className="screen">
+      <div
+        style={{ height, width, lineHeight: `${height}px` }}
+        className="screen"
+      >
         <span className={textClassName}>
           {this.state.words[this.state.currentWordIndex]}
         </span>
@@ -64,6 +73,7 @@ Screen.propTypes = {
   speed: PropTypes.number,
   onStart: PropTypes.func,
   onEnd: PropTypes.func,
+  onFinish: PropTypes.func,
   serif: PropTypes.bool,
   running: PropTypes.bool
 };

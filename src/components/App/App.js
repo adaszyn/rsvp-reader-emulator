@@ -16,17 +16,27 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      running: false
+      running: false,
+      startTime: 0,
+      stopTime: 0
     };
   }
   onControlPanelStart() {
+    const now = new Date().getTime();
     this.setState({
-      running: true
+      running: true,
+      startTime: now
     });
   }
-  onControlPanelPause() {
+  onControlPanelReset() {
     this.setState({
       running: false
+    });
+  }
+  onScreenReaderFinished (time) {
+    this.setState({
+      running: false,
+      stopTime: time
     });
   }
   render() {
@@ -34,7 +44,7 @@ class App extends Component {
       <div className="App">
         <ControlPanel
           onStart={this.onControlPanelStart.bind(this)}
-          onPause={this.onControlPanelPause.bind(this)}
+          onReset={this.onControlPanelReset.bind(this)}
         />
         <Screen
           running={this.state.running}
@@ -43,11 +53,14 @@ class App extends Component {
           wordsPerScreen={2}
           speed={800}
           text={SAMPLE_TEXT}
-          onStart={onStartCallback}
-          onStop={onStopCallback}
           serif={true}
+          onFinish={this.onScreenReaderFinished.bind(this)}
         />
-        <Statistics />
+        <Statistics 
+          running={this.state.running}
+          startTime={this.state.startTime}
+          stopTime={this.state.stopTime}
+        />
       </div>
     );
   }

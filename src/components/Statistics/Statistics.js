@@ -1,8 +1,39 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { formatMilisecondsToText } from "../../util/time-util"
+const REFRESH_TIME = 10;
 
 export default class Statistics extends Component {
-  state = {};
+  constructor (props) {
+    super(props)
+    this.state = {
+      startTime: props.startTime,
+      stopTime: props.stopTime,
+    }
+  }
+
+  setupInterval () {
+      const { startTime, stopTime } = this.props;
+
+      this.intervalId = setInterval(() => {
+        this.setState({
+          time: formatMilisecondsToText(new Date().getTime() - this.props.startTime)
+        })
+      }, REFRESH_TIME)
+  }
+
+  stopInterval () {
+    clearInterval(this.intervalId);
+  }
+
+  componentWillReceiveProps ({ running }) {
+    if (running) {
+      this.setupInterval();
+    } else {
+      this.stopInterval();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -10,7 +41,7 @@ export default class Statistics extends Component {
           <tbody>
             <tr>
               <th>Time</th>
-              <th>{this.props.timeElapsed}</th>
+              <th>{this.state.time}</th>
             </tr>
           </tbody>
         </table>
@@ -20,5 +51,6 @@ export default class Statistics extends Component {
 }
 
 Statistics.propTypes = {
-  timeElapsed: PropTypes.string
+  startTime: PropTypes.number,
+  stopTime: PropTypes.number
 };
