@@ -76,18 +76,22 @@ export default class MainScreen extends Component {
           </div>
         </div>
         <div className="config-panel right">
-          <button
-            className="button"
-            onClick={this.onRsvpButtonClick.bind(this)}
-          >
-            RSVP
-          </button>
-          <button
-            className="button"
-            onClick={this.onBlockButtonClick.bind(this)}
-          >
-            BLOCK
-          </button>
+          <div className="config-panel top">
+            <button
+              className="button -regular center"
+              onClick={this.onRsvpButtonClick.bind(this)}
+            >
+              RSVP
+            </button>
+            <button
+              className="button -regular center"
+              onClick={this.onBlockButtonClick.bind(this)}
+            >
+              BLOCK
+            </button>
+          </div>
+          <div className="config-panel bottom">
+          </div>
         </div>
       </div>
     );

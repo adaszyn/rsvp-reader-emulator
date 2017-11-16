@@ -1,6 +1,7 @@
 .MainScreen {
   display: flex;
-
+  background-color: black;
+  height: 100%;
 }
 .MainScreen .config-panel {
   display: flex;
@@ -8,6 +9,13 @@
   flex-direction: column;
   height: 100%;
 }
+
+.MainScreen .config-panel.top, .MainScreen .config-panel.bottom {
+  display: flex;
+  height: 50%;
+  width: 100%;
+}
+
 .screen-size-label {
   text-transform: uppercase;
   text-align: right;
