@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import Screen from "../Screen/Screen";
 import Statistics from "../Statistics/Statistics";
 import ControlPanel from "../ControlPanel/ControlPanel";
+import PropTypes from 'prop-types';
 import "./App.css";
 
-const SAMPLE_TEXT = `Lorem ipsum dolor sit amet, consectetur 
-adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua. 
-Ut enim ad minim veniam, quis`;
+
 
 class App extends Component {
   constructor(props) {
@@ -53,11 +51,12 @@ class App extends Component {
         />
         <Screen
           running={this.state.running}
-          width={300}
-          height={300}
+          width={this.props.width}
+          height={this.props.height}
           wordsPerScreen={2}
+          fontSize={this.props.fontSize}
           speed={this.state.speed}
-          text={SAMPLE_TEXT}
+          text={this.props.text}
           serif={true}
           onFinish={this.onScreenReaderFinished.bind(this)}
         />
@@ -66,9 +65,17 @@ class App extends Component {
           startTime={this.state.startTime}
           stopTime={this.state.stopTime}
         />
+        <button onClick={this.props.onExit}>BACK</button>
       </div>
     );
   }
 }
 
+App.propTypes = {
+  onExit: PropTypes.func,
+  width: PropTypes.number,
+  height: PropTypes.number,
+  text: PropTypes.string,
+  fontSize: PropTypes.number,
+}
 export default App;

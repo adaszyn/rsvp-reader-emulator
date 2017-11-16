@@ -1,0 +1,9 @@
+
+.screen.block {
+  padding: 10px;
+  overflow: scroll;
+}
+.screen.block > .text {
+  line-height: initial;
+}
+

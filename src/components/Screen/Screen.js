@@ -54,7 +54,7 @@ export default class Screen extends Component {
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
     return (
       <div
-        style={{ height, width, lineHeight: `${height}px` }}
+        style={{ height, width, lineHeight: `${height}px`, fontSize: this.props.fontSize }}
         className="screen"
       >
         <span className={textClassName}>
@@ -75,5 +75,6 @@ Screen.propTypes = {
   onEnd: PropTypes.func,
   onFinish: PropTypes.func,
   serif: PropTypes.bool,
-  running: PropTypes.bool
+  running: PropTypes.bool,
+  fontSize: PropTypes.number
 };
