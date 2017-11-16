@@ -22,7 +22,7 @@ export default class BlockScreen extends Component {
   }
 }
 
-Screen.propTypes = {
+BlockScreen.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   text: PropTypes.string,

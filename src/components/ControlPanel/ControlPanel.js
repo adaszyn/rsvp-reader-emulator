@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import playIcon from "./play.svg";
-import resetIcon from "./reset.svg";
+import PlayIcon from '../Icons/PlayIcon';
+import ResetIcon from '../Icons/ResetIcon';
 import "./ControlPanel.css";
 
-const PlayIcon = ({ onStart }) => (
-  <img alt="play-icon" className="control-icon" onClick={onStart} src={playIcon} />
-);
 
-const ResetIcon = ({ onReset }) => (
-  <img alt="reset-icon" className="control-icon" onClick={onReset} src={resetIcon} />
-);
 
 export default class ControlPanel extends Component {
   render() {
