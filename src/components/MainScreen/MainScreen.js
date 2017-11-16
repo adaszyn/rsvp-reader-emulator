@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import App from "../App/App";
 import BlockScreen from "../BlockScreen/BlockScreen";
+import "./MainScreen.css";
 
 const VIEW = {
   RSVP_VIEW: 1 << 1,
@@ -21,16 +22,16 @@ incididunt ut labore et dolore magna aliqua
 adipiscing elit, sed do eiusmod tempor 
 incididunt ut labore et dolore magna aliqua. 
 Ut enim ad minim veniam, quis`;
+const INITIAL_SLIDER_VALUE = 150;
 
 export default class MainScreen extends Component {
   constructor() {
     super();
     this.state = {
       view: VIEW.MENU_VIEW,
-      height: 200,
-      width: 200,
       text: SAMPLE_TEXT,
-      fontSize: 14
+      fontSize: 14,
+      sliderValue: INITIAL_SLIDER_VALUE
     };
   }
   onBlockButtonClick() {
@@ -48,25 +49,56 @@ export default class MainScreen extends Component {
       view: VIEW.MENU_VIEW
     });
   }
+  onRangeChange({ target: { value } }) {
+    this.setState({
+      sliderValue: Number(value)
+    });
+  }
+  getScreenSize() {
+    return {
+      width: `${this.state.sliderValue}px`,
+      height: `${this.state.sliderValue}px`
+    };
+  }
   renderMenuView() {
     return (
-      <div className="main-screen">
-        <button className="button" onClick={this.onRsvpButtonClick.bind(this)}>
-          RSVP
-        </button>
-        <button className="button" onClick={this.onBlockButtonClick.bind(this)}>
-          BLOCK
-        </button>
+      <div className="MainScreen">
+        <div className="config-panel left">
+          <input
+            type="range"
+            defaultValue={INITIAL_SLIDER_VALUE}
+            min={140}
+            max={300}
+            onChange={this.onRangeChange.bind(this)}
+          />
+          <div style={this.getScreenSize()} className="screen preview">
+            <p className="screen-size-label">{this.state.sliderValue} px</p>
+          </div>
+        </div>
+        <div className="config-panel right">
+          <button
+            className="button"
+            onClick={this.onRsvpButtonClick.bind(this)}
+          >
+            RSVP
+          </button>
+          <button
+            className="button"
+            onClick={this.onBlockButtonClick.bind(this)}
+          >
+            BLOCK
+          </button>
+        </div>
       </div>
     );
   }
   renderRsvpView() {
     return (
       <App
-        height={this.state.height}
-        width={this.state.width}
+        height={this.state.sliderValue}
+        width={this.state.sliderValue}
         text={this.state.text}
-        fontSize={this.state.fontSize}    
+        fontSize={this.state.fontSize}
         onExit={this.setMenuView.bind(this)}
       />
     );
@@ -75,9 +107,9 @@ export default class MainScreen extends Component {
   renderBlockView() {
     return (
       <BlockScreen
-        height={this.state.height}
-        width={this.state.width}
-        fontSize={this.state.fontSize}            
+        height={this.state.sliderValue}
+        width={this.state.sliderValue}
+        fontSize={this.state.fontSize}
         text={this.state.text}
         onExit={this.setMenuView.bind(this)}
       />
