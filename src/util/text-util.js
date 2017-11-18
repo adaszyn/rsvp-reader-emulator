@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+const PUNCTUATION_REGEX = /^[\‒\–\—\―|$&~=\\\/⁄@+*!?({[\]})<>‹›«».;:^‘’“”'",،、`·\•†‡°″¡¿※#№÷×%‰\−‱¶′‴§_‖¦]+$/;
+
 export function splitTextByWordCount(text, wordCount) {
   const result = [];
   if (typeof text !== "string") {
@@ -10,4 +13,27 @@ export function splitTextByWordCount(text, wordCount) {
   }
 
   return result
+}
+
+
+export function countWords(text) {
+  if(Array.isArray(text)) {
+    return text
+      .reduce((acc, curr) => acc + countWordsInSentence(curr), 0)
+  }
+  return countWordsInSentence(text)
+}
+
+export function countWordsInSentence(sentence) {
+  return sentence
+    .split(' ')
+    .filter(isNotPunctuation)
+    .reduce((acc, curr) => acc + 1, 0)
+}
+
+function isNotPunctuation(word) {
+  if (typeof word !== 'string') {
+    return false;
+  }
+  return !PUNCTUATION_REGEX.test(word);
 }

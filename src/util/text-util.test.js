@@ -1,4 +1,4 @@
-import { splitTextByWordCount } from "./text-util";
+import { splitTextByWordCount, countWords, countWordsInSentence } from "./text-util";
 
 const TEST_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis";
 
@@ -24,4 +24,15 @@ describe("text-util:splitTextByWordCount", () => {
             "word4 word5"
         ])        
     })
+})
+
+describe("text-util:countWordsInSentence", () => {
+  it('Should return number of words in single string', () => {
+    const got1 = countWordsInSentence('Sample sentence is here, lorem ipsum.')
+    const got2 = countWordsInSentence('.,,< just checking the stuff, ...*.')
+    const got3 = countWordsInSentence('Sample sentence is here..... thus is here.')
+    expect(got1).toEqual(6) 
+    expect(got2).toEqual(4) 
+    expect(got3).toEqual(7) 
+  })
 })

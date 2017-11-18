@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import App from "../App/App";
-import BlockScreen from "../BlockScreen/BlockScreen";
+import BlockScreenTest from "../BlockScreenTest/BlockScreenTest";
 import "./MainScreen.css";
 
 const VIEW = {
@@ -22,6 +22,21 @@ incididunt ut labore et dolore magna aliqua
 adipiscing elit, sed do eiusmod tempor 
 incididunt ut labore et dolore magna aliqua. 
 Ut enim ad minim veniam, quis`;
+
+const SAMPLE_TEXTS = [
+  'adipiscing elit, sed do eiusmod tempor ',
+  'incididunt ut labore et dolore magna aliqua',
+  'adipiscing elit, sed do eiusmod tempor ',
+  'incididunt ut labore et dolore magna aliqua',
+  'adipiscing elit, sed do eiusmod tempor ',
+  'incididunt ut labore et dolore magna aliqua',
+  'adipiscing elit, sed do eiusmod tempor ',
+  'adipiscing elit, sed do eiusmod tempor ',
+  'incididunt ut labore et dolore magna aliqua',
+  'adipiscing elit, sed do eiusmod tempor ',
+  'incididunt ut labore et dolore magna aliqua.', 
+  'Ut enim ad minim veniam, quis'
+]
 const INITIAL_SLIDER_VALUE = 150;
 
 export default class MainScreen extends Component {
@@ -30,6 +45,7 @@ export default class MainScreen extends Component {
     this.state = {
       view: VIEW.MENU_VIEW,
       text: SAMPLE_TEXT,
+      texts: SAMPLE_TEXTS,
       fontSize: 14,
       sliderValue: INITIAL_SLIDER_VALUE
     };
@@ -59,6 +75,11 @@ export default class MainScreen extends Component {
       width: `${this.state.sliderValue}px`,
       height: `${this.state.sliderValue}px`
     };
+  }
+  onSampleSizeChange({target: {value}}) {
+    this.setState({
+      sampleSize: Number(value)
+    })
   }
   renderMenuView() {
     return (
@@ -91,6 +112,12 @@ export default class MainScreen extends Component {
             </button>
           </div>
           <div className="config-panel bottom">
+            <select defaultValue={10} onChange={this.onSampleSizeChange.bind(this)}>
+              <option>10</option>
+              <option>20</option>
+              <option>30</option>
+              <option>40</option>
+            </select>
           </div>
         </div>
       </div>
@@ -110,11 +137,11 @@ export default class MainScreen extends Component {
 
   renderBlockView() {
     return (
-      <BlockScreen
+      <BlockScreenTest
         height={this.state.sliderValue}
         width={this.state.sliderValue}
         fontSize={this.state.fontSize}
-        text={this.state.text}
+        texts={this.state.texts}
         onExit={this.setMenuView.bind(this)}
       />
     );
