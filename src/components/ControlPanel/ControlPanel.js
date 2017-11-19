@@ -18,7 +18,7 @@ export default class ControlPanel extends Component {
     })
   }
   render() {
-    const { onReset, onStart, onSpeedChange, running } = this.props;
+    const { onReset, onStart, running } = this.props;
     return (
       <div className="ControlPanel">
         {this.props.running ? (
