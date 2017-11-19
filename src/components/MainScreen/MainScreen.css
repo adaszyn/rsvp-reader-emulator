@@ -2,6 +2,7 @@
   display: flex;
   background-color: black;
   height: 100%;
+  overflow: hidden;
 }
 .screen-size-label {
   text-transform: uppercase;

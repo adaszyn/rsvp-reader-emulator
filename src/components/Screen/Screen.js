@@ -23,11 +23,15 @@ export default class Screen extends Component {
         clearInterval(this.intervalId);
         this.props.onFinish()
       } else {
+        if (!this._isMounted) {
+          this.clearInterval();
+          return;
+        }
         this.setState({
           currentWordIndex: this.state.currentWordIndex + 1
         });
       }
-    }, this.props.speed);
+    }, this.props.wordsPerScreen * 1000 / this.props.speed * 60  );
   }
 
   clearInterval() {
@@ -47,6 +51,14 @@ export default class Screen extends Component {
       });
       this.clearInterval();
     }
+  }
+
+  componentDidMount() { 
+    this._isMounted = true;
+  }
+  
+  componentWillUnmount() {
+     this._isMounted = false;
   }
 
   render() {

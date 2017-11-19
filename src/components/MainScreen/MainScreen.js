@@ -4,6 +4,8 @@ import BlockScreenTest from "../BlockScreenTest/BlockScreenTest";
 import "./MainScreen.css";
 import "font-awesome/css/font-awesome.min.css";
 import "font-awesome/fonts/fontawesome-webfont.ttf";
+import { EMAILS } from "../../data/emails";
+import { SHORT_MESSAGES } from "../../data/short-messages";
 
 const VIEW = {
   RSVP_VIEW: 1 << 1,
@@ -11,45 +13,17 @@ const VIEW = {
   MENU_VIEW: 1 << 3
 };
 
-const SAMPLE_TEXT = `Lorem ipsum dolor sit amet, consectetur 
-adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua
-adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua
-adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua
-adipiscing elit, sed do eiusmod tempor 
-adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua
-adipiscing elit, sed do eiusmod tempor 
-incididunt ut labore et dolore magna aliqua. 
-Ut enim ad minim veniam, quis`;
-
-const SAMPLE_TEXTS = [
-  "adipiscing elit, sed do eiusmod tempor ",
-  "incididunt ut labore et dolore magna aliqua",
-  "adipiscing elit, sed do eiusmod tempor ",
-  "incididunt ut labore et dolore magna aliqua",
-  "adipiscing elit, sed do eiusmod tempor ",
-  "incididunt ut labore et dolore magna aliqua",
-  "adipiscing elit, sed do eiusmod tempor ",
-  "adipiscing elit, sed do eiusmod tempor ",
-  "incididunt ut labore et dolore magna aliqua",
-  "adipiscing elit, sed do eiusmod tempor ",
-  "incididunt ut labore et dolore magna aliqua.",
-  "Ut enim ad minim veniam, quis"
-];
 const INITIAL_SLIDER_VALUE = 150;
 
 export default class MainScreen extends Component {
   constructor() {
     super();
+    this.messageType = "SMS";    
     this.state = {
       view: VIEW.MENU_VIEW,
-      text: SAMPLE_TEXT,
-      texts: SAMPLE_TEXTS,
       fontSize: 14,
-      sliderValue: INITIAL_SLIDER_VALUE
+      sliderValue: INITIAL_SLIDER_VALUE,
+      sampleSize: 10
     };
   }
   onBlockButtonClick() {
@@ -83,6 +57,25 @@ export default class MainScreen extends Component {
       sampleSize: Number(value)
     });
   }
+  onMessageTypeChange({target: {value}}) {
+    this.messageType = value;
+  }
+  getRandomMessages(n) {
+    const array = this.messageType === "SMS"
+      ? SHORT_MESSAGES
+      : EMAILS
+    let result = new Array(n),
+      len = array.length,
+      taken = new Array(len);
+    if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+    while (n--) {
+      let x = Math.floor(Math.random() * len);
+      result[n] = array[x in taken ? taken[x] : x];
+      taken[x] = --len;
+    }
+    return result;
+  }
   renderMenuView() {
     return (
       <div className="MainScreen">
@@ -101,12 +94,16 @@ export default class MainScreen extends Component {
         </div>
         <div className="config-panel right">
           <div className="config-panel top">
+            <select onChange={this.onMessageTypeChange.bind(this)} defaultValue="SMS">
+              <option>SMS</option>
+              <option>EMAIL</option>
+            </select>
             <button
-              style={{width: "100%"}}
+              style={{ width: "100%" }}
               className="button -regular center"
               onClick={this.onRsvpButtonClick.bind(this)}
             >
-              <i class="fa fa-play" aria-hidden="true" />
+              <i className="fa fa-play" aria-hidden="true" />
               RSVP
             </button>
           </div>
@@ -117,7 +114,7 @@ export default class MainScreen extends Component {
                 className="button -regular center"
                 onClick={this.onBlockButtonClick.bind(this)}
               >
-                <i class="fa fa-play" aria-hidden="true" />
+                <i className="fa fa-play" aria-hidden="true" />
                 BLOCK
               </button>
               <select
@@ -141,7 +138,7 @@ export default class MainScreen extends Component {
       <App
         height={this.state.sliderValue}
         width={this.state.sliderValue}
-        text={this.state.text}
+        text={this.getRandomMessages(1).pop()}
         fontSize={this.state.fontSize}
         onExit={this.setMenuView.bind(this)}
       />
@@ -154,7 +151,7 @@ export default class MainScreen extends Component {
         height={this.state.sliderValue}
         width={this.state.sliderValue}
         fontSize={this.state.fontSize}
-        texts={this.state.texts}
+        texts={this.getRandomMessages(this.state.sampleSize)}
         onExit={this.setMenuView.bind(this)}
       />
     );

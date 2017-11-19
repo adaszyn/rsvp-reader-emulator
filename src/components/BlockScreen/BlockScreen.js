@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import "./BlockScreen.css";
 
 export default class BlockScreen extends Component {
+  componentDidUpdate(oldProps) {
+    if (this.props.text !== oldProps.text && this.screen) {
+      this.screen.scrollTop = 0;
+    }
+  }
+  
   render() {
     const { width, height } = this.props;
     const textClassName = `text ${this.props.serif
@@ -10,6 +16,7 @@ export default class BlockScreen extends Component {
       : "sans-serif"} block`;
     return (
       <div
+        ref={screen => this.screen = screen}
         style={{ height, width, lineHeight: `${height}px` }}
         className="screen block"
       >
