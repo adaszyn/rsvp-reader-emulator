@@ -3,8 +3,8 @@ import BlockScreen from "../BlockScreen/BlockScreen";
 import PropTypes from "prop-types";
 import { formatMilisecondsToText } from "../../util/time-util";
 import { countWords } from "../../util/text-util";
-import { roundNumber } from '../../util/number-util'
-import './BlockScreenTest.css'
+import { roundNumber } from "../../util/number-util";
+import "./BlockScreenTest.css";
 
 export default class BlockScreenTest extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ export default class BlockScreenTest extends Component {
   renderStatistics() {
     const timeInMinutes = this.measuredTime / (1000 * 60);
     const speed = roundNumber(this.totalWords / timeInMinutes);
-    const time = formatMilisecondsToText(this.measuredTime)
+    const time = formatMilisecondsToText(this.measuredTime);
     return (
       <table className="statistics-table">
         <tbody>
@@ -93,21 +93,27 @@ export default class BlockScreenTest extends Component {
     const shouldRenderStatistics = !this.state.isRunning && this.state.finished;
     return (
       <div className="App">
-        <BlockScreen
-          height={height}
-          width={width}
-          fontSize={fontSize}
-          text={this.getCurrentText()}
-        />
-        {this.renderProgressButton()}
-        {this.state.isRunning && (
-          <span style={{ color: "white" }}>
-            {" "}
-            {formatMilisecondsToText(this.state.currentTime)}{" "}
-          </span>
-        )}
-        <button onClick={onExit}>EXIT</button>
-        {shouldRenderStatistics && this.renderStatistics()}
+        <div className="config-panel left">
+          <BlockScreen
+            height={height}
+            width={width}
+            fontSize={fontSize}
+            text={this.getCurrentText()}
+          />
+        </div>
+        <div className="config-panel right">
+          <div className="config-panel top">{this.renderProgressButton()}</div>
+          <div className="config-panel bottom">
+            {this.state.isRunning && (
+              <span style={{ color: "white" }}>
+                {" "}
+                {formatMilisecondsToText(this.state.currentTime)}{" "}
+              </span>
+            )}
+            <button onClick={onExit}>EXIT</button>
+            {shouldRenderStatistics && this.renderStatistics()}
+          </div>
+        </div>
       </div>
     );
   }
