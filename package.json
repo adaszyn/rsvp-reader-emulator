@@ -6,6 +6,7 @@
     "font-awesome": "^4.7.0",
     "jest-cli": "^20.0.4",
     "material-ui": "^0.19.4",
+    "material-ui-number-input": "^5.0.24",
     "pad-left": "^2.1.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",

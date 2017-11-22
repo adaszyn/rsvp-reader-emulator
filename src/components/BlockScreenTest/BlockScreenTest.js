@@ -5,6 +5,7 @@ import { formatMilisecondsToText } from "../../util/time-util";
 import { countWords } from "../../util/text-util";
 import { roundNumber } from "../../util/number-util";
 import "./BlockScreenTest.css";
+import { RaisedButton } from "material-ui";
 
 export default class BlockScreenTest extends Component {
   constructor(props) {
@@ -25,11 +26,29 @@ export default class BlockScreenTest extends Component {
     const isLastText =
       this.state.currentTextIndex === this.props.texts.length - 1;
     if (isRunning && !isLastText) {
-      return <button onClick={this.onNext.bind(this)}>NEXT</button>;
+      return (
+        <RaisedButton
+          style={{ width: "80%" }}
+          onClick={this.onNext.bind(this)}
+          label="NEXT"
+        />
+      );
     } else if (isRunning && isLastText) {
-      return <button onClick={this.onFinish.bind(this)}>FINISH</button>;
+      return (
+        <RaisedButton
+          style={{ width: "80%" }}
+          onClick={this.onFinish.bind(this)}
+          label="FINISH"
+        />
+      );
     } else if (!finished) {
-      return <button onClick={this.onStart.bind(this)}>START</button>;
+      return (
+        <RaisedButton
+          style={{ width: "80%" }}
+          onClick={this.onStart.bind(this)}
+          label="START"
+        />
+      );
     }
     return false;
   }
@@ -110,7 +129,11 @@ export default class BlockScreenTest extends Component {
                 {formatMilisecondsToText(this.state.currentTime)}{" "}
               </span>
             )}
-            <button onClick={onExit}>EXIT</button>
+            <RaisedButton
+              style={{ width: "80%" }}
+              label="EXIT"
+              onClick={onExit}
+            />
             {shouldRenderStatistics && this.renderStatistics()}
           </div>
         </div>

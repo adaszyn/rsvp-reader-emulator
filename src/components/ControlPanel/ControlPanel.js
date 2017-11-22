@@ -3,41 +3,52 @@ import PropTypes from "prop-types";
 import PlayIcon from "../Icons/PlayIcon";
 import ResetIcon from "../Icons/ResetIcon";
 import "./ControlPanel.css";
+import NumberInput from "material-ui-number-input";
+import { RaisedButton } from "material-ui";
 
 export default class ControlPanel extends Component {
   constructor() {
     super();
     this.state = {
       speed: 100
-    }
+    };
   }
-  onSpeedChange({ target: { value } }) {
+  onSpeedChange(e, value) {
     this.props.onSpeedChange(value);
     this.setState({
       speed: value
-    })
+    });
   }
   render() {
     const { onReset, onStart, running } = this.props;
     return (
       <div className="ControlPanel">
-        {this.props.running ? (
-          <ResetIcon onReset={onReset} />
-        ) : (
-          <PlayIcon onStart={onStart} />
-        )}
-        <div>
-          <span style={{color: "white"}}>APPROXIMATE TIME</span>
-          <br/>
-          <input
+          <NumberInput
             type="number"
+            floatingLabelText="Approximate Time"
             min={100}
-            defaultValue={100}
+            value={String(this.state.speed)}
+            style={{ width: "80%" }}
             max={1000}
+            id="speed-input"
+            className="speed-input"
             disabled={running}
             onChange={this.onSpeedChange.bind(this)}
           />
-        </div>
+        {this.props.running ? (
+          <RaisedButton
+            label="RESET"
+            style={{ width: "80%" }}
+            onClick={onReset}
+          />
+        ) : (
+          <RaisedButton
+            style={{ width: "80%" }}
+            label="START"
+            onClick={onStart}
+          />
+        )}
+      
       </div>
     );
   }

@@ -1,6 +1,6 @@
 .MainScreen {
   display: flex;
-  background-color: black;
+  background-color: white;
   height: 100%;
   overflow: hidden;
 }
@@ -21,9 +21,7 @@
   display: flex;
   width: 100%;
 }
-.block-button-container > * {
 
-}
 .block-button-container > button {
   width: 100%;
 }

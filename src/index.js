@@ -4,6 +4,11 @@ import './Lato-Light.ttf'
 import './index.css';
 import MainScreen from './components/MainScreen/MainScreen';
 import registerServiceWorker from './registerServiceWorker';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-ReactDOM.render(<MainScreen />, document.getElementById('root'));
+const muiWrapper = () => <MuiThemeProvider>
+  <MainScreen/>
+</MuiThemeProvider>
+
+ReactDOM.render(muiWrapper(), document.getElementById('root'));
 registerServiceWorker();

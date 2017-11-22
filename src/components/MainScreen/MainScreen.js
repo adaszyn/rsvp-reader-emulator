@@ -6,6 +6,9 @@ import "font-awesome/css/font-awesome.min.css";
 import "font-awesome/fonts/fontawesome-webfont.ttf";
 import { EMAILS } from "../../data/emails";
 import { SHORT_MESSAGES } from "../../data/short-messages";
+import { RaisedButton } from "material-ui";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 
 const VIEW = {
   RSVP_VIEW: 1 << 1,
@@ -18,8 +21,8 @@ const INITIAL_SLIDER_VALUE = 150;
 export default class MainScreen extends Component {
   constructor() {
     super();
-    this.messageType = "SMS";    
     this.state = {
+      messageType: "SMS",
       view: VIEW.MENU_VIEW,
       fontSize: 14,
       sliderValue: INITIAL_SLIDER_VALUE,
@@ -52,18 +55,19 @@ export default class MainScreen extends Component {
       height: `${this.state.sliderValue}px`
     };
   }
-  onSampleSizeChange({ target: { value } }) {
+  onSampleSizeChange(ev, index, value) {
+    console.log(value);
     this.setState({
       sampleSize: Number(value)
     });
   }
-  onMessageTypeChange({target: {value}}) {
-    this.messageType = value;
+  onMessageTypeChange(ev, index, value) {
+    this.setState({
+      messageType: value
+    });
   }
   getRandomMessages(n) {
-    const array = this.messageType === "SMS"
-      ? SHORT_MESSAGES
-      : EMAILS
+    const array = this.messageType === "SMS" ? SHORT_MESSAGES : EMAILS;
     let result = new Array(n),
       len = array.length,
       taken = new Array(len);
@@ -94,40 +98,42 @@ export default class MainScreen extends Component {
         </div>
         <div className="config-panel right">
           <div className="config-panel top">
-            <select onChange={this.onMessageTypeChange.bind(this)} defaultValue="SMS">
-              <option>SMS</option>
-              <option>EMAIL</option>
-            </select>
-            <button
-              style={{ width: "100%" }}
-              className="button -regular center"
-              onClick={this.onRsvpButtonClick.bind(this)}
+            <SelectField
+              style={{ width: "80%" }}
+              floatingLabelText="Message Type"
+              onChange={this.onMessageTypeChange.bind(this)}
+              value={this.state.messageType}
             >
-              <i className="fa fa-play" aria-hidden="true" />
-              RSVP
-            </button>
+              <MenuItem primaryText="SMS" value="SMS" />
+              <MenuItem primaryText="EMAIL" value="EMAIL" />
+            </SelectField>
+            <SelectField
+              value={this.state.sampleSize}
+              style={{ width: "80%" }}
+              floatingLabelText="Sample Size"
+              onChange={this.onSampleSizeChange.bind(this)}
+            >
+              <MenuItem primaryText="10" value={10} />
+              <MenuItem primaryText="20" value={20} />
+              <MenuItem primaryText="30" value={30} />
+            </SelectField>
+          
           </div>
 
           <div className="config-panel bottom">
-            <div className="block-button-container">
-              <button
-                className="button -regular center"
-                onClick={this.onBlockButtonClick.bind(this)}
-              >
-                <i className="fa fa-play" aria-hidden="true" />
-                BLOCK
-              </button>
-              <select
-                defaultValue={10}
-                className="sample-select"
-                onChange={this.onSampleSizeChange.bind(this)}
-              >
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>40</option>
-              </select>
-            </div>
+          <RaisedButton
+              style={{ width: "80%" }}
+              label="RSVP"
+              primary={true}
+              onClick={this.onRsvpButtonClick.bind(this)}
+            />
+            <RaisedButton
+              label="BLOCK"
+              style={{ width: "80%" }}
+              primary={true}
+              onClick={this.onBlockButtonClick.bind(this)}
+            />
+        
           </div>
         </div>
       </div>
