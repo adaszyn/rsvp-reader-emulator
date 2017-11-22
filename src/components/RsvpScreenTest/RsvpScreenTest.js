@@ -43,7 +43,7 @@ class RsvpScreenTest extends Component {
     });
   }
   renderScreen() {
-    const { width, height } = this.props;
+    const { width, height, text } = this.props;
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
     if (!this.state.running) {
       return (
@@ -106,7 +106,10 @@ RsvpScreenTest.propTypes = {
   onExit: PropTypes.func,
   width: PropTypes.number,
   height: PropTypes.number,
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   fontSize: PropTypes.number
 };
 export default RsvpScreenTest;

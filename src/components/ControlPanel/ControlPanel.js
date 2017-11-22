@@ -25,7 +25,7 @@ export default class ControlPanel extends Component {
       <div className="ControlPanel">
           <NumberInput
             type="number"
-            floatingLabelText="Approximate Time"
+            floatingLabelText="Approximate Speed"
             min={100}
             value={String(this.state.speed)}
             style={{ width: "80%" }}

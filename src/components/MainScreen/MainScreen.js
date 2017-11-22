@@ -56,7 +56,6 @@ export default class MainScreen extends Component {
     };
   }
   onSampleSizeChange(ev, index, value) {
-    console.log(value);
     this.setState({
       sampleSize: Number(value)
     });
@@ -67,7 +66,7 @@ export default class MainScreen extends Component {
     });
   }
   getRandomMessages(n) {
-    const array = this.messageType === "SMS" ? SHORT_MESSAGES : EMAILS;
+    const array = this.state.messageType === "SMS" ? SHORT_MESSAGES : EMAILS;
     let result = new Array(n),
       len = array.length,
       taken = new Array(len);
@@ -144,7 +143,7 @@ export default class MainScreen extends Component {
       <RsvpScreenTest
         height={this.state.sliderValue}
         width={this.state.sliderValue}
-        text={this.getRandomMessages(1).pop()}
+        text={this.getRandomMessages(this.state.sampleSize)}
         fontSize={this.state.fontSize}
         onExit={this.setMenuView.bind(this)}
       />

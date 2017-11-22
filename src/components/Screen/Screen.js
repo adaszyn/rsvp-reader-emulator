@@ -5,10 +5,20 @@ import "./Screen.css";
 
 export default class Screen extends Component {
   constructor(props) {
-    const { text, wordsPerScreen, running } = props;
+    let { text, wordsPerScreen, running } = props;
+    let displayedText = text;
     super(props);
+    this.token = "-".repeat(wordsPerScreen);
+    let words
+    if (Array.isArray(text)) {
+      words = text.reduce((acc, curr) => {
+        return [...acc, ...splitTextByWordCount(curr, wordsPerScreen), this.token]
+      }, [])
+    } else {
+      words = splitTextByWordCount(displayedText, wordsPerScreen);
+    }
     this.state = {
-      words: splitTextByWordCount(text, wordsPerScreen),
+      words,
       currentWordIndex: 0,
       running
     };
@@ -64,9 +74,12 @@ export default class Screen extends Component {
   render() {
     const { width, height } = this.props;
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
+    const backgroundColor = this.state.words[this.state.currentWordIndex] === this.token
+      ? "black"
+      : "white";
     return (
       <div
-        style={{ height, width, lineHeight: `${height}px`, fontSize: this.props.fontSize }}
+        style={{ height, width, lineHeight: `${height}px`, fontSize: this.props.fontSize, backgroundColor }}
         className="screen"
       >
         <span className={textClassName}>
@@ -80,7 +93,10 @@ export default class Screen extends Component {
 Screen.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  text: PropTypes.string,
+  text: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array
+  ]),
   wordsPerScreen: PropTypes.number,
   speed: PropTypes.number,
   onStart: PropTypes.func,
