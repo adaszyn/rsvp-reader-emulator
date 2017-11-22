@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.4f605cb0.css",
-  "main.css.map": "static/css/main.4f605cb0.css.map",
-  "main.js": "static/js/main.09cc5efc.js",
-  "main.js.map": "static/js/main.09cc5efc.js.map",
+  "main.css": "static/css/main.23a4f3a3.css",
+  "main.css.map": "static/css/main.23a4f3a3.css.map",
+  "main.js": "static/js/main.004b39c9.js",
+  "main.js.map": "static/js/main.004b39c9.js.map",
   "static/media/Lato-Light.ttf": "static/media/Lato-Light.5b761f2d.ttf",
   "static/media/cmunbmr.ttf": "static/media/cmunbmr.ab3d1451.ttf",
   "static/media/cmunbtl.ttf": "static/media/cmunbtl.b32c92ff.ttf",
@@ -10,7 +10,5 @@
   "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
   "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
   "static/media/fontawesome-webfont.woff2?v=4.7.0": "static/media/fontawesome-webfont.af7ae505.woff2",
-  "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff",
-  "static/media/play.svg": "static/media/play.5888e5d0.svg",
-  "static/media/reset.svg": "static/media/reset.86a4153b.svg"
+  "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff"
 }
