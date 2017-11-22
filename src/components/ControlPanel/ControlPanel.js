@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import PlayIcon from "../Icons/PlayIcon";
-import ResetIcon from "../Icons/ResetIcon";
 import "./ControlPanel.css";
 import NumberInput from "material-ui-number-input";
 import { RaisedButton } from "material-ui";

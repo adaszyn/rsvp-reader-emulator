@@ -5,7 +5,6 @@ import ControlPanel from "../ControlPanel/ControlPanel";
 import PropTypes from "prop-types";
 import "./RsvpScreenTest.css";
 import { countWords } from "../../util/text-util";
-import SelectField from "material-ui/SelectField";
 import { RaisedButton } from "material-ui";
 
 class RsvpScreenTest extends Component {
@@ -43,7 +42,7 @@ class RsvpScreenTest extends Component {
     });
   }
   renderScreen() {
-    const { width, height, text } = this.props;
+    const { width, height } = this.props;
     const textClassName = `text ${this.props.serif ? "serif" : "sans-serif"}`;
     if (!this.state.running) {
       return (
