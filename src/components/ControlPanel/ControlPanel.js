@@ -30,7 +30,7 @@ export default class ControlPanel extends Component {
           <span style={{color: "white"}}>{this.state.speed}</span>
           <br/>
           <input
-            type="range"
+            type="number"
             min={100}
             defaultValue={100}
             max={1000}
