@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import App from "../App/App";
+import RsvpScreenTest from "../RsvpScreenTest/RsvpScreenTest";
 import BlockScreenTest from "../BlockScreenTest/BlockScreenTest";
 import "./MainScreen.css";
 import "font-awesome/css/font-awesome.min.css";
@@ -135,7 +135,7 @@ export default class MainScreen extends Component {
   }
   renderRsvpView() {
     return (
-      <App
+      <RsvpScreenTest
         height={this.state.sliderValue}
         width={this.state.sliderValue}
         text={this.getRandomMessages(1).pop()}

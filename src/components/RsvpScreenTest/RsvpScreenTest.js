@@ -3,12 +3,10 @@ import Screen from "../Screen/Screen";
 import Statistics from "../Statistics/Statistics";
 import ControlPanel from "../ControlPanel/ControlPanel";
 import PropTypes from 'prop-types';
-import "./App.css";
+import "./RsvpScreenTest.css";
 import { countWords } from "../../util/text-util";
 
-
-
-class App extends Component {
+class RsvpScreenTest extends Component {
   constructor(props) {
     super(props);
     this.totalWords = countWords(this.props.text)
@@ -89,11 +87,11 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+RsvpScreenTest.propTypes = {
   onExit: PropTypes.func,
   width: PropTypes.number,
   height: PropTypes.number,
   text: PropTypes.string,
   fontSize: PropTypes.number,
 }
-export default App;
+export default RsvpScreenTest;

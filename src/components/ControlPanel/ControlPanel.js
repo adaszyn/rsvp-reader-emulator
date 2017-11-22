@@ -27,7 +27,7 @@ export default class ControlPanel extends Component {
           <PlayIcon onStart={onStart} />
         )}
         <div>
-          <span style={{color: "white"}}>{this.state.speed}</span>
+          <span style={{color: "white"}}>APPROXIMATE TIME</span>
           <br/>
           <input
             type="number"
